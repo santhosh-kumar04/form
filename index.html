@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+    <body class="place-content-center">
+    <div>
+    <h1 class="px-5 py-3 text-black">Registration form</h1>
+    <div class="w-full max-w-xs">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+              name
+            </label>
+            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="name">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+              email
+            </label>
+            <input required class="shadow appearance-none border border-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="email">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <input class="shadow appearance-none border border-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="password">
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="dob">
+              date of birth
+            </label>
+            <input required class="shadow appearance-none border border-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="dob" type="date" placeholder="dob">
+          </div>
+          <div class="mb-6">
+              
+            <input type="checkbox" id="acceptTerms" name="acceptTerms">
+            <label for="acceptTerms">Accept Terms & Conditions</label>
+          </div>
+         
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" id="submit" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
+        
+      </div>
+      </div>
+      <script>
+        const email = document.getElementById('email');
+        email.addEventListener('input',()=> validate(email));
+
+        const submit = document.getElementById('submit');
+        submit.addEventListener('click',() => validate(email));
+
+        const DOB = document.getElementById('dob');
+        DOB.addEventListener('input',()=> age(DOB));
+        
+
+        function calculateAge (birthDate, otherDate) {
+            birthDate = new Date (birthDate);
+            otherDate = new Date (otherDate);
+            var years = (otherDate.getFullYear () - birthDate.getFullYear ());
+        if (otherDate.getMonth () < birthDate.getMonth () || otherDate.getMonth () == birthDate.getMonth () && otherDate.getDate () < birthDate.getDate ()) {
+        years--;
+        }
+        return years;
+        }
+        function age(date){
+            let c = calculateAge(date,"21-09-2023");
+            if(c>=18 & c<=55){
+                element.setCustomValidity('');
+            }
+            else{
+                element.setCustomValidity("The DOB is not correct!!");
+                element.reportValidity();
+            }
+        }
+        function validate(element){
+            if(element.validity.typeMismatch){
+                element.setCustomValidity("The email is not correct!!");
+                element.reportValidity();
+            }
+            else{
+                element.setCustomValidity('');
+            }
+        }
+      </script>
+</body>
+</html>
